@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap');
+
+body, button {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+#new-game {
+  font-size: 20px;
+}
+
+.player-name, .player-score, #dice {
+  font-size: 30px;
+}
+
+#dice {
+  padding: 1em;
+}
+
+.mobile-hide {
+  visibility: visible;
+  display: inherit;
+}
+
+.mobile-show {
+  visibility: hidden;
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .mobile-hide {
+    visibility: hidden;
+    display: none;
+  }
+
+  .mobile-show {
+    visibility: visible;
+    display: inherit;
+  }
+}
+
+.d-block {
+  display: block;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mt-5 {
+  margin-top: 5em;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-5 {
+  margin-bottom: 5em;
+}

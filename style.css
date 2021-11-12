@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap');
+
+body, button {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+#new-game {
+  font-size: 20px;
+}
+
+.player-name, .player-score, #dice {
+  font-size: 30px;
+}
+
+#dice {
+  padding: 1em;
+}
+
+.mobile-hide {
+  visibility: visible;
+  display: inherit;
+}
+
+.mobile-show {
+  visibility: hidden;
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .mobile-hide {
+    visibility: hidden;
+    display: none;
+  }
+
+  .mobile-show {
+    visibility: visible;
+    display: inherit;
+  }
+}
+
+.d-block {
+  display: block;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mt-5 {
+  margin-top: 5em;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-5 {
+  margin-bottom: 5em;
+}
+
+nav {
+          width: 100%;
+          height: 50px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+    }
+.logo {
+      width: 20%
+
+    }
+.shopping {
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: right;
+      font-size: 30px;
+      margin-right: 10px;
+    }
+.shopping:hover {
+      cursor: pointer;
+    }
+p{
+    Background-color:#ff6333;
+    font-size: 20px;
+    line-height: 50px;
+    letter-spacing: 10px;
+    width: 150px;
+    height:150px;
+    padding:10px;
+    margin: 50px;
+       }
+ div {
+        font-size: 20px;
+        line-height: 50px;
+        letter-spacing: 10px;
+        width: 200px;
+        word-wrap: normal;
+        background-color: #ffa733;
+        border:2px solid #b36030;
+        border-radius: 10px;
+        -webkit-border-radius: 10px     ;
+        -moz-border-radius: 10px     ;
+        -ms-border-radius: 10px     ;
+        -o-border-radius: 10px     ;
+}
+button{
+  Background-color:#4733ff;
+  width: 150px;
+  height:50px;
+  padding:20px;
+  margin: 50px;
+  border:2px solid #b33f30;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+#button{
+  Background-color: green;
+  width: 50px;
+  height:50px;
+  padding:10px;
+  margin: 50px;
+  border:2px solid #b36030;
+  border-radius: 10px;
+  -webkit-border-radius: 10px     ;
+  -moz-border-radius: 10px     ;
+  -ms-border-radius: 10px     ;
+  -o-border-radius: 10px     ;
+}
+

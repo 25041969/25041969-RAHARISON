@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+<meta char set="utf-8">
+<meta name="viewport" content="width=device-width initial-scale=1.0"/>
+<title>Boutique</title>
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body id="body">
+        <header>
+            <nav>
+                <ul class="menu">
+                    <li><a href="../home/index.html">accueil</a></li>
+                    <li><a href="../contact/contact.html">contact</a></li>
+                    <li><a href="../jeu/jeu.html">jeu</a></li>
+                </ul>
+            </nav>
+        </header>
+        <h1>interface de jeux</h1>
+        
+          <p>     Une parite de jeu est proposée sur ce site pour vous distraire,<br/>il y a deux joueurs pour la partie,<br/> 
+            soit <u>l'ordinateur contre humain, soit humain avec humain.</u> 
+            le but est de lancer le dé,si le joueur obtient un 1, son score est perdu et c'est la fin de son tour.<br/>
+                        
+            Chaque joueur peut mémoriser son score en <b>cliquant sur le bouton "hold"</b></p>
+            
+            <h3>Lancer le jeu</h3>
+        <div class="container center-align mt-5">
+            <div class="row mb-5">
+              <div class="col m3 mobile-hide"></div>
+              <div class="col s12 m6">
+                <button type="button" name="new-game" id="new-game" class="waves-effect waves-teal btn-flat grey-text">
+                  <i class="material-icons left red-text text-lighten-3">add_circle_outline</i>NEW game</button>
+              </div>
+              <div class="col m3 mobile-hide"></div>
+            </div>
+            <div class="row mb-0">
+              <div class="col s4 grey-text player-name">
+                <span class="mobile-hide">PLAYER 1</span>
+                <span class="mobile-show">J1</span>
+              </div>
+              <div class="col s4">
+              </div>
+              <div class="col s4 grey-text player-name">
+                <span class="mobile-hide">PLAYER 2</span>
+                <span class="mobile-show">J2</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4 grey-text player-score">
+                <span id="global-score-1" class="red-text lighten-3">0</span>
+              </div>
+              <div class="col s4 red-text lighten-1">
+                <span id="dice" class="red lighten-4">1</span>
+              </div>
+              <div class="col s4 grey-text player-score">
+                <span id="global-score-2" class="red-text lighten-3">0</span>
+              </div>
+            </div>
+            <div class="row mt-5">
+              <div class="col s4">
+                <div class="card-panel red lighten-2">
+                  <span class="white-text d-block">ROUND</span>
+                  <span class="white-text d-block" id="round-score-1">0</span>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="d-block mt-1">
+                  <button id="roll-dice" class="waves-effect waves-teal btn-flat grey-text">
+                    <i class="material-icons left red-text text-lighten-3">autorenew</i>Lancer le Dé
+                  </button>
+                </div>
+                <div class="d-block">
+                  <button id="hold" class="waves-effect waves-teal btn-flat grey-text">
+                    <i class="material-icons left red-text text-lighten-3">get_app</i>"Hold" 
+                  </button>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="card-panel red lighten-2">
+                  <span class="white-text d-block">ROUND</span>
+                  <span class="white-text d-block" id="round-score-2">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="player.js" type="text/javascript"></script>
+<script src="dice.js" type="text/javascript"></script>
+<script src="game.js" type="text/javascript"></script>
+
+</body>
+    
+</html> 
