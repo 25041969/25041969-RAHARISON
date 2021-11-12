@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Projet</title>
+</head>
+
+<body>
+  <div class="container center-align mt-5">
+    <div class="row mb-5">
+      <div class="col m3 mobile-hide"></div>
+      <div class="col s12 m6">
+        <button type="button" name="new-game" id="new-game" class="waves-effect waves-teal btn-flat grey-text">
+          <i class="material-icons left red-text text-lighten-3">add_circle_outline</i> NOUVELLE PARTIE
+        </button>
+      </div>
+      <div class="col m3 mobile-hide"></div>
+    </div>
+    <div class="row mb-0">
+      <div class="col s4 grey-text player-name">
+        <span class="mobile-hide">JOUEUR 1</span>
+        <span class="mobile-show">J1</span>
+      </div>
+      <div class="col s4">
+      </div>
+      <div class="col s4 grey-text player-name">
+        <span class="mobile-hide">JOUEUR 2</span>
+        <span class="mobile-show">J2</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s4 grey-text player-score">
+        <span id="global-score-1" class="red-text lighten-3">0</span>
+      </div>
+      <div class="col s4 red-text lighten-1">
+        <span id="dice" class="red lighten-4">1</span>
+      </div>
+      <div class="col s4 grey-text player-score">
+        <span id="global-score-2" class="red-text lighten-3">0</span>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col s4">
+        <div class="card-panel red lighten-2">
+          <span class="white-text d-block">ROUND</span>
+          <span class="white-text d-block" id="round-score-1">0</span>
+        </div>
+      </div>
+      <div class="col s4">
+        <div class="d-block mt-1">
+          <button id="roll-dice" class="waves-effect waves-teal btn-flat grey-text">
+            <i class="material-icons left red-text text-lighten-3">autorenew
+
+            </i> LANCER LE Dé
+          </button>
+        </div>
+        <div class="d-block">
+          <button id="hold" class="waves-effect waves-teal btn-flat grey-text">
+            <i class="material-icons left red-text text-lighten-3">get_app</i> MAINTENIR
+          </button>
+        </div>
+      </div>
+      <div class="col s4">
+        <div class="card-panel red lighten-2">
+          <span class="white-text d-block">ROUND</span>
+          <span class="white-text d-block" id="round-score-2">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="player.js" type="text/javascript"></script>
+  <script src="dice.js" type="text/javascript"></script>
+  <script src="game.js" type="text/javascript"></script>
+</body>
+
+</html>
+
+class Dice {
+  numbers = [1, 2, 3, 4, 5, 6];
+  roll() {
+    return this.numbers[Math.floor(Math.random() * this.numbers.length)];
+  }
+}
+
+let playerTurn;
+const dice = new Dice();
+const player1 = new Player(1);
+const player2 = new Player(2);
+const newGameBtn = document.getElementById("new-game");
+const rollDiceBtn = document.getElementById("roll-dice");
+const holdBtn = document.getElementById("hold");
+const diceScore = document.getElementById("dice");
+
+newGameBtn.addEventListener('click', function(event) {
+  newgame();
+});
+
+rollDiceBtn.addEventListener('click', function(event) {
+  rollDice();
+});
+
+holdBtn.addEventListener('click', function(event) {
+  hold();
+});
+
+function initgame() {
+  player1.globalDom = document.getElementById("global-score-1");
+  player1.roundDom = document.getElementById("round-score-1");
+  player2.globalDom = document.getElementById("global-score-2");
+  player2.roundDom = document.getElementById("round-score-2");
+  newgame();
+}
+
+function newgame() {
+  player1.changeGlobalScore(0);
+  player1.changeRoundScore(0);
+  player2.changeGlobalScore(0);
+  player2.changeRoundScore(0);
+  playerTurn = player1;
+  console.log("new game start");
+}
+
+function rollDice() {
+  const result = dice.roll();
+  diceScore.innerHTML = result;
+  playerTurn.changeRoundScore(playerTurn.roundScore + result);
+}
+
+function hold() {
+  playerTurn.changeGlobalScore(playerTurn.globalScore + playerTurn.roundScore);
+  playerTurn.changeRoundScore(0);
+  if (playerTurn.id == player1.id) {
+    playerTurn = player2;
+  } else {
+    playerTurn = player1;
+  }
+}
+
+initgame();
+
+const shop = document.getElementById('shopping');
+
+const goToShop = () => {
+
+   alert('Votre liste d\'achat');
+
+}
+
+shop.addEventListener('click', goToShop);
+
+var button = document.getElementById('button')
+
+function evenement() {
+
+  alert('Vous avez cliqué sur le bouton');
+
+}
+
+button.addEventListener('click', evenement);
+
+  var button = document.createElement('button');
+  var textNode = document.createTextNode('Click');
+  button.appendChild(textNode);
+  button.className = 'mdl-button mdl-js-button mdl-js-ripple-effect';
+  componentHandler.upgradeElement(button);
+  document.getElementById('container').appendChild(button);
+
+  class Player {
+    id = 0;
+    globalScore = 0;
+    roundScore = 0;
+    globalDom;
+    roundDom;
+  
+    constructor(id) {
+      this.id = id;
+      console.log("Joueur " + this.id + "connecté");
+    }
+  
+    changeGlobalScore(score) {
+      this.globalDom.innerHTML = score;
+      this.globalScore = score;
+    }
+  
+    changeRoundScore(score) {
+      this.roundDom.innerHTML = score;
+      this.roundScore = score;
+    };
+  };
+
+  let playerTurn;
+const dice = new Dice();
+const player1 = new Player(1);
+const player2 = new Player(2);
+const newGameBtn = document.getElementById("new-game");
+const rollDiceBtn = document.getElementById("roll-dice");
+const holdBtn = document.getElementById("hold");
+const diceScore = document.getElementById("dice");
+
+newGameBtn.addEventListener('click', function(event) {
+  newgame();
+});
+
+rollDiceBtn.addEventListener('click', function(event) {
+  rollDice();
+});
+
+holdBtn.addEventListener('click', function(event) {
+  hold();
+});
+
+function initgame() {
+  player1.globalDom = document.getElementById("global-score-1");
+  player1.roundDom = document.getElementById("round-score-1");
+  player2.globalDom = document.getElementById("global-score-2");
+  player2.roundDom = document.getElementById("round-score-2");
+  newgame();
+}
+
+function newgame() {
+  player1.changeGlobalScore(0);
+  player1.changeRoundScore(0);
+  player2.changeGlobalScore(0);
+  player2.changeRoundScore(0);
+  playerTurn = player1;
+  console.log("new game start");
+}
+
+function rollDice() {
+  const result = dice.roll();
+  diceScore.innerHTML = result;
+  playerTurn.changeRoundScore(playerTurn.roundScore + result);
+}
+
+function hold() {
+  playerTurn.changeGlobalScore(playerTurn.globalScore + playerTurn.roundScore);
+  playerTurn.changeRoundScore(0);
+  if (playerTurn.id == player1.id) {
+    playerTurn = player2;
+  } else {
+    playerTurn = player1;
+  }
+}
+
+initgame();
+
+class Dice {
+  numbers = [1, 2, 3, 4, 5, 6];
+  roll() {
+    return this.numbers[Math.floor(Math.random() * this.numbers.length)];
+  }
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+<meta char set="utf-8">
+<meta name="viewport" content="width=device-width initial-scale=1.0"/>
+<title>Boutique</title>
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body id="body">
+        <header>
+            <nav>
+                <ul class="menu">
+                    <li><a href="../home/index.html">accueil</a></li>
+                    <li><a href="../contact/contact.html">contact</a></li>
+                    <li><a href="../jeu/jeu.html">jeu</a></li>
+                </ul>
+            </nav>
+        </header>
+        <h1>interface de jeux</h1>
+        
+          <p>     Une parite de jeu est proposée sur ce site pour vous distraire,<br/>il y a deux joueurs pour la partie,<br/> 
+            soit <u>l'ordinateur contre humain, soit humain avec humain.</u> 
+            le but est de lancer le dé,si le joueur obtient un 1, son score est perdu et c'est la fin de son tour.<br/>
+                        
+            Chaque joueur peut mémoriser son score en <b>cliquant sur le bouton "hold"</b></p>
+            
+            <h3>Lancer le jeu</h3>
+        <div class="container center-align mt-5">
+            <div class="row mb-5">
+              <div class="col m3 mobile-hide"></div>
+              <div class="col s12 m6">
+                <button type="button" name="new-game" id="new-game" class="waves-effect waves-teal btn-flat grey-text">
+                  <i class="material-icons left red-text text-lighten-3">add_circle_outline</i>NEW game</button>
+              </div>
+              <div class="col m3 mobile-hide"></div>
+            </div>
+            <div class="row mb-0">
+              <div class="col s4 grey-text player-name">
+                <span class="mobile-hide">PLAYER 1</span>
+                <span class="mobile-show">J1</span>
+              </div>
+              <div class="col s4">
+              </div>
+              <div class="col s4 grey-text player-name">
+                <span class="mobile-hide">PLAYER 2</span>
+                <span class="mobile-show">J2</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4 grey-text player-score">
+                <span id="global-score-1" class="red-text lighten-3">0</span>
+              </div>
+              <div class="col s4 red-text lighten-1">
+                <span id="dice" class="red lighten-4">1</span>
+              </div>
+              <div class="col s4 grey-text player-score">
+                <span id="global-score-2" class="red-text lighten-3">0</span>
+              </div>
+            </div>
+            <div class="row mt-5">
+              <div class="col s4">
+                <div class="card-panel red lighten-2">
+                  <span class="white-text d-block">ROUND</span>
+                  <span class="white-text d-block" id="round-score-1">0</span>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="d-block mt-1">
+                  <button id="roll-dice" class="waves-effect waves-teal btn-flat grey-text">
+                    <i class="material-icons left red-text text-lighten-3">autorenew</i>Lancer le Dé
+                  </button>
+                </div>
+                <div class="d-block">
+                  <button id="hold" class="waves-effect waves-teal btn-flat grey-text">
+                    <i class="material-icons left red-text text-lighten-3">get_app</i>"Hold" 
+                  </button>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="card-panel red lighten-2">
+                  <span class="white-text d-block">ROUND</span>
+                  <span class="white-text d-block" id="round-score-2">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="player.js" type="text/javascript"></script>
+<script src="dice.js" type="text/javascript"></script>
+<script src="game.js" type="text/javascript"></script>
+
+</body>
+    
+</html> 
+class Player {
+  id = 0;
+  globalScore = 0;
+  roundScore = 0;
+  globalDom;
+  roundDom;
+
+  constructor(id) {
+    this.id = id;
+    console.log("Joueur " + this.id + " connecté");
+  }
+
+  changeGlobalScore(score) {
+    this.globalDom.innerHTML = score;
+    this.globalScore = score;
+  }
+
+  changeRoundScore(score) {
+    this.roundDom.innerHTML = score;
+    this.roundScore = score;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap');
+
+body, button {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+#new-game {
+  font-size: 20px;
+}
+
+.player-name, .player-score, #dice {
+  font-size: 30px;
+}
+
+#dice {
+  padding: 1em;
+}
+
+.mobile-hide {
+  visibility: visible;
+  display: inherit;
+}
+
+.mobile-show {
+  visibility: hidden;
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .mobile-hide {
+    visibility: hidden;
+    display: none;
+  }
+
+  .mobile-show {
+    visibility: visible;
+    display: inherit;
+  }
+}
+
+.d-block {
+  display: block;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mt-5 {
+  margin-top: 5em;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-5 {
+  margin-bottom: 5em;
+}
